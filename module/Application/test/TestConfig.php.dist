@@ -2,7 +2,6 @@
 
 return array(
     'modules' => array(
-        'Events',
         'Application',
     ),
     'module_listener_options' => array(
