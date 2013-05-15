@@ -15,7 +15,7 @@ use Zend\EventManager\EventManagerAwareInterface;
  * @author Stefano Valle
  *
  */
-class EventService implements EventManagerAwareInterface {
+class EventService {
     
     /**
      * Event Manager (Zend Framework 2 component - NOT related to conferences!)
@@ -94,41 +94,8 @@ class EventService implements EventManagerAwareInterface {
             
         $this->mapper->saveEvent($event);
         
-        //trigger 'event_saved' event
-        $this->getEventManager()->trigger('event_saved', $this, array(
-                                          'title' => $event->getTitle()
-        ));
-    
         return $event;
         
     }
     
-    /**
-     * Injects Event Manager (ZF2 component) into this class
-     * 
-     * @see \Zend\EventManager\EventManagerAwareInterface::setEventManager()
-     */
-    public function setEventManager(EventManagerInterface $events)
-    {
-        $events->setIdentifiers(array(
-            __CLASS__,
-            get_called_class(),
-        ));
-        $this->eventManager = $events;
-        return $this;
-    }
-
-    /**
-     * Fetches Event Manager (ZF2 component) from this class
-     * 
-     * @see \Zend\EventManager\EventsCapableInterface::getEventManager()
-     */
-    public function getEventManager()
-    {
-        if (null === $this->eventManager) {
-            $this->setEventManager(new EventManager());
-        }
-        return $this->eventManager;
-    }
-
 }

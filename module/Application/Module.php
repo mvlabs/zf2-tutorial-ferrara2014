@@ -17,42 +17,13 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $e->getApplication()->getServiceManager()->get('translator');
+        
+        // Route listener is created for module, allowing it to 
+        // handle dispatching
         $I_application       = $e->getApplication();
-        $I_eventManager        = $I_application->getEventManager();
+        $I_eventManager      = $I_application->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($I_eventManager);
-        
-        // attach mail service to events
-        $I_sharedEventManager = $I_eventManager->getSharedManager();
-        $I_sm = $I_application->getServiceManager();
-        $I_mailService = $I_sm->get('Application\Service\MailService');
-        $I_sharedEventManager->attach('Events\Service\EventService', 'event_saved', array($I_mailService, 'logEventSaved'));
-        
-        // Common Error Handling Code
-        $I_eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
-        
-            // Do nothing if no error in the event
-            $error = $e->getError();
-            if (empty($error)) {
-                return;
-            }
-             
-            switch ($error) {
-                case Application::ERROR_CONTROLLER_NOT_FOUND:
-                case Application::ERROR_CONTROLLER_INVALID:
-                case Application::ERROR_ROUTER_NO_MATCH:
-                    // Specifically not handling these
-                    echo "Requested Resource Not Found";
-                    exit;
-                     
-                case Application::ERROR_EXCEPTION:
-                default:
-                    echo "Exception Thrown: " . $e->getParam('exception')->getMessage();
-                    exit;
-            }
-             
-        });
         
     }
 
