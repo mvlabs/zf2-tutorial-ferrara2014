@@ -16,17 +16,6 @@ return array(
                     ),
                 ),
             ),
-            'event' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/event',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Events\Controller',
-                        'controller'    => 'Events',
-                        'action'        => 'event',
-                    ),
-                )
-            ),
             
         ),
     ),

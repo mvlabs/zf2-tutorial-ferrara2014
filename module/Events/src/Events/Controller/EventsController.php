@@ -10,24 +10,6 @@ use Zend\Mail\Message as Message;
 class EventsController extends AbstractActionController
 {
     
-    
-    /**
-     * Main service for handling events (IE conferences)
-     * 
-     * @var \Events\Service\EventService
-     */
-    private $eventService;
-    
-    
-    /**
-     * Class constructor
-     * 
-     * @param \Events\Service\EventService $eventService
-     */
-    public function __construct(\Events\Service\EventService $eventService) {
-        $this->eventService = $eventService;
-    }
-    
     /**
      * Returns a list of events, as fethched from model
      * 
@@ -35,18 +17,7 @@ class EventsController extends AbstractActionController
      */
     public function indexAction()
     {
-    	$country = $this->getAndCheckNumericParam('country');
-    	return new ViewModel(array('events' => $this->eventService->getList($country)));
+    	return new ViewModel();
     }
     
-    /**
-     * Displays a specific event 
-     * 
-     * @return \Zend\View\Model\ViewModel
-     */
-    public function eventAction() {
-    	$id = $this->getAndCheckNumericParam('id');
-    	return new ViewModel(array('event' => $this->eventService->getEvent($id)));
-    }
-
 }

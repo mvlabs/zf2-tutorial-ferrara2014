@@ -7,7 +7,7 @@ use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module implements ViewHelperProviderInterface
+class Module 
 {
 
     public function getConfig()
@@ -26,49 +26,14 @@ class Module implements ViewHelperProviderInterface
         );
     }
     
-    
-    // Service Manager Configuration
-    public function getServiceConfig() {
-    	return array(
-    			'factories' => array(
-  					'Events\Service\EventService' => 'Events\Service\EventServiceFactory',
-                    'Events\Mapper\EventMapper' => 'Events\Mapper\ZendDbEventMapperFactory'
-    			),
-    			
-    	);
-    }
-    
     public function getControllerConfig() {
         
         return array(
-            'factories' => array(
-                'Events\Controller\Events' => 'Events\Controller\EventsControllerFactory',
+            'invokables' => array(
+                'Events\Controller\Events' => 'Events\Controller\EventsController',
             ),
         );
         
     } 
-    
-    
-    public function getControllerPluginConfig()
-    {
-    	return array(
-    		'invokables' => array(
-    		    'getAndCheckNumericParam' => 'Events\Controller\Plugin\GetAndCheckNumericParam',
-    		)
-    	);
-    }
-    
-    
-    public function getViewHelperConfig()
-    {
-    	return array(
-			'invokables' => array( 
-			    'cost' => 'Events\View\Helper\DisplayCost',
-			),
-    	    'factories' => array(
-    	        'rightSideBar' => 'Events\View\Helper\RightSideBarFactory',
-    	    ),
-    	);
-    }
     
 }

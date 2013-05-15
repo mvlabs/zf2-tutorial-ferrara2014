@@ -16,8 +16,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $eventService = $this->getServiceLocator()->get('Events\Service\EventService');
-        return new ViewModel(array('events' => $eventService->getLocalEvents()));
+        return new ViewModel();
     }
     
     public function aboutAction()
