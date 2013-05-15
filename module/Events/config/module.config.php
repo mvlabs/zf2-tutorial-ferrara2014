@@ -64,6 +64,17 @@ return array(
                 )
             ),
             
+            'api' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/api[/:id]',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Events\Controller',
+                        'controller'    => 'Api',
+                    ),
+                ),
+            ),
+            
         ),
     ),
     
@@ -85,6 +96,9 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+        'strategies' => array(
+            'ViewJsonStrategy',
         ),
     ),
 );

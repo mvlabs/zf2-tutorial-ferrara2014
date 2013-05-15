@@ -56,6 +56,25 @@ class DoctrineEventMapper implements EventMapperInterface {
         return $country;
     }
 
+    /**
+     * Gets list of events (as array)
+     *
+     * @return array Event list
+     */
+    public function getListArray() {
+    
+        $aI_events = $this->getEventList();
+    
+        $as_events = array();
+        foreach($aI_events as $I_event) {
+    
+            $as_events[] = $I_event->getArrayCopy();
+    
+        }
+    
+        return $as_events;
+    
+    }
     
     /**
      * Gets list of events

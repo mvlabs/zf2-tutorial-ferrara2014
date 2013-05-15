@@ -44,6 +44,7 @@ class Module implements ViewHelperProviderInterface
         return array(
             'factories' => array(
                 'Events\Controller\Events' => 'Events\Controller\EventsControllerFactory',
+                'Events\Controller\Api' => 'Events\Controller\ApiControllerFactory',
             ),
         );
         
