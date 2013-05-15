@@ -12,7 +12,6 @@ class ApiController extends AbstractRestfulController {
     
     public function indexAction()
     {
-        echo "INDEX";
         return new ViewModel();
     }
     
@@ -24,9 +23,16 @@ class ApiController extends AbstractRestfulController {
     public function getList()
     {
         
-        $I_eventService = $this->getServiceLocator()->get('Events\Service\EventService');
+        // make sure this is a good restful implementation,
+        // not just some random data 
+        // return new JsonModel($I_eventService->getListArray());
         
-        return new JsonModel($I_eventService->getListArray());
+        $events = array(
+            array('id' => 1, 'name'=>'PHPDay 2013', 'country' => 'Italy', 'parent' => 'http://zf2-hubmein/api/1'),
+            array('id' => 2, 'name'=>'JSDay 2013', 'country' => 'Italy', 'parent' => 'http://zf2-hubmein/api/2')
+            );
+        
+        return new JsonModel($events);
         
     }
     
@@ -40,7 +46,10 @@ class ApiController extends AbstractRestfulController {
     {
         $I_eventService = $this->getServiceLocator()->get('Events\Service\EventService');
         
-        return new JsonModel($I_eventService->getEvent($id)->toArray());
+        $data = $I_eventService->getEvent($id)->getArrayCopy();
+        $data['parent'] = 'http://zf2-hubmein/api';
+        
+        return new JsonModel($data);
     }
     
     /**
@@ -51,8 +60,7 @@ class ApiController extends AbstractRestfulController {
      */
     public function create($data)
     {
-        echo "POST";
-        return new JsonModel(array());
+        //TODO: Implement Method
     }
     
     /**
