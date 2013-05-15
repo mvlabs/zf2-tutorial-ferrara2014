@@ -68,7 +68,6 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
-            'Application\Service\MailService' => 'Application\Service\MailServiceFactory',
         ),
     ),
     'translator' => array(
