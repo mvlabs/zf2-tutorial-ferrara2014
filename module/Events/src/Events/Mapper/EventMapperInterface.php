@@ -11,6 +11,4 @@ interface EventMapperInterface {
     
     public function getCountryList();
     
-    public function saveEvent(\Events\Entity\Event $event);
-    
 } 

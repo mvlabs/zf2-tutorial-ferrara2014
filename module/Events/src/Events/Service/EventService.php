@@ -82,20 +82,4 @@ class EventService {
     	return $this->mapper->getCountryList();
     }
     
-    /**
-     * Inserts an event from array data
-     * 
-     * @param array $formData
-     * @return \Events\Entity\Event
-     */
-    public function insertEventFromArray(array $formData) {
-        
-        $event = Event::createFromArray($formData);
-            
-        $this->mapper->saveEvent($event);
-        
-        return $event;
-        
-    }
-    
 }

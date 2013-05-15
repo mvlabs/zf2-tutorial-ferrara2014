@@ -92,25 +92,4 @@ class ZendDbEventMapper implements EventMapperInterface {
         return $result;
     }
 
-    /**
-     * Save an event
-     *
-     * @param Event Event to save
-     */
-    public function saveEvent(Event $event)
-    {
-        $data = $event->getArrayCopy();
-        
-        $id   = (int) $data['id'];
-        if ($id === 0) {
-            unset($data['id']);        // to let postgres generate it using sequences
-            $this->eventTable->insert($data);
-        } else {
-            if ($this->getEvent($id)) {
-                $this->eventTable->update($data, array('id' => $id));
-            } else {
-                throw new \DomainException("The event $id does not exist");
-            }
-        }
-    }
 }
