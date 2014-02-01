@@ -32,7 +32,13 @@ class Module implements ViewHelperProviderInterface
     	return array(
     			'factories' => array(
   					'Events\Service\EventService' => 'Events\Service\EventServiceFactory',
-                    'Events\Mapper\EventMapper' => 'Events\Mapper\ZendDbEventMapperFactory'
+                    
+                    /*
+                     * Two mappers are available: one for Zend\Db and one for Doctrine.
+                     * Now we use the latter, but you could easily switch to the first if needed
+                     */
+                    //'Events\Mapper\EventMapper' => 'Events\Mapper\ZendDbEventMapperFactory',
+                    'Events\Mapper\EventMapper' => 'Events\Mapper\DoctrineEventMapperFactory',
     			),
     			
     	);
