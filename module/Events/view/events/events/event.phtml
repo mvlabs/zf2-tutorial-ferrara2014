@@ -16,7 +16,7 @@ $this->headTitle($event->getTitle());
           <div class="event-logo"><figure><img src="/images/default_icon.jpg" alt="Logo" ></figure></div>
           <div class="e-details">
               <div class="meta">
-                  <span class="date"><?php echo $event->getDatefrom(); ?> - <?php echo $event->getDateto(); ?></span>
+                  <span class="date"><?php echo $event->getDatefrom()->format("d/m/Y"); ?> - <?php echo $event->getDateto()->format("d/m/Y"); ?></span>
                   <span class="location"><?php echo $event->getCity(); ?>, <?php echo $event->getCountryName(); ?></span>
                   <span class="cost"><?php echo $this->cost($event->getAveragedayfee()); ?></span>
               </div>
@@ -25,7 +25,7 @@ $this->headTitle($event->getTitle());
                   <p><?php echo $this->event->getAbstract(); ?></p>
                   <div class="other-info">
                   	<p>
-                    <strong>Confrence Website:</strong>
+                    <strong>Conference Website:</strong>
                     <a href="<?php echo $event->getMainsitelink(); ?>"><?php echo $event->getMainsitelink(); ?></a>
                     </p>
                   </div>
