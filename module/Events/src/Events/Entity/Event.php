@@ -333,8 +333,8 @@ class Event {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->abstract = (isset($data['abstract'])) ? $data['abstract'] : null;
-        $this->datefrom = (isset($data['datefrom'])) ? \DateTime::createFromFormat('Y-m-d', substr($data['datefrom'], 0, 10)) : null;
-        $this->dateto = (isset($data['dateto'])) ? \DateTime::createFromFormat('Y-m-d', substr($data['dateto'],0,10)) : null;
+        $this->datefrom = (isset($data['datefrom'])) ? \DateTime::createFromFormat('Y/m/d', substr($data['datefrom'], 0, 10)) : null;
+        $this->dateto = (isset($data['dateto'])) ? \DateTime::createFromFormat('Y/m/d', substr($data['dateto'],0,10)) : null;
         $this->city = (isset($data['city'])) ? $data['city'] : null;
         $this->country = (isset($data['country'])) ? $data['country'] : null;
         $this->venue = (isset($data['venue'])) ? $data['venue'] : null;
