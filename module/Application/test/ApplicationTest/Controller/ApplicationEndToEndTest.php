@@ -38,11 +38,11 @@ class ApplicationEndToEndTest extends AbstractHttpControllerTestCase {
     	$this->assertActionName('index');
     	
     	// Tells us whether we're on right page
-    	$this->assertQueryContentContains("html body#about div#page div#main-content.clearfix div.wrap div.full-width div.intro-message div.border-bottom h2 strong", "best events");
+    	$this->assertQueryContentContains("div.intro-message div.border-bottom h2 strong", "best events");
     	
     	// Counting elements
-    	$this->assertQueryCountMax("html body#about div#page div#main-content.clearfix div.wrap div.full-width section#content.fl div.conferences div.event", self::HOME_MAX_EVENTS);
-    	 
+    	$this->assertQueryCountMax("div.event", self::HOME_MAX_EVENTS);
+        
     	// XPath to pick Nth element (2nd in this case - no such support for CSS selectors)
     	$this->assertXPathQueryContentContains('/html/body/div/div[2]/div/div/div[2]/div[2]/h3', 'Speaker');
     	
