@@ -11,7 +11,9 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.3.*",
         "zendframework/zend-developer-tools": "dev-master",
-        "zf-commons/zfc-admin": "0.2.*"
+        "zf-commons/zfc-admin": "0.2.*",
+        "bjyoungblood/bjy-authorize": "1.4.*",
+        "zf-commons/zfc-user": "1.2.*"
     },
     "require-dev" : {
         "phpunit/phpunit": "3.7.*"

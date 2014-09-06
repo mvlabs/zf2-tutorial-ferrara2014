@@ -8,6 +8,9 @@ return array(
         'DoctrineORMModule',
         'ZendDeveloperTools',
         'ZfcAdmin',
+        'ZfcBase',
+        'ZfcUser',
+        'BjyAuthorize',
         
         // our app modules
         'Events',

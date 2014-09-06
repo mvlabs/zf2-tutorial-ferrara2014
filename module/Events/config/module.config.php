@@ -67,4 +67,21 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    
+    
+    'bjyauthorize' => [
+        
+        'guards' => [
+            
+            'BjyAuthorize\Guard\Controller' => [
+                
+                ['controller' => 'Events\Controller\Events', 'roles' => []],
+                ['controller' => 'Events\Controller\Admin', 'roles' => ['admin']],
+                
+            ],
+            
+        ],
+        
+    ],
+    
 );
