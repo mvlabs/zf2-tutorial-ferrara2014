@@ -28,6 +28,22 @@ return array(
                 )
             ),
             
+            'zfcadmin' => array(
+                'child_routes' => array(
+                    'events' => array(
+                        'type' => 'Literal',
+                        'options' => array(
+                            'route' => '/events',
+                            'defaults' => array(
+                                'controller' => 'Events\Controller\Admin',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            
+            
         ),
     ),
     

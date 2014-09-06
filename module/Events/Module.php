@@ -50,6 +50,9 @@ class Module implements ViewHelperProviderInterface
             'factories' => array(
                 'Events\Controller\Events' => 'Events\Controller\EventsControllerFactory',
             ),
+            'invokables' => array(
+                'Events\Controller\Admin'  => 'Events\Controller\AdminController',
+            ),
         );
         
     } 
