@@ -25,6 +25,23 @@ class Module
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($I_eventManager);
         
+        
+        // attach to ZfcUser's 'register' event
+        $eventManager = $e->getApplication()->getEventManager();
+
+        $zfcServiceEvents = $e->getApplication()->getServiceManager()->get('zfcuser_user_service')->getEventManager();
+        $entityManager = $e->getApplication()->getServiceManager()->get('Doctrine\ORM\EntityManager');
+        
+        $zfcServiceEvents->attach('register', function($e) use ($entityManager) {
+
+            $user = $e->getParam('user');
+
+            // by default all created users are admin
+            $user->setRole($entityManager->getReference('\Application\Entity\Role', 'admin'));
+            
+        });
+
+        
     }
 
     public function getConfig()

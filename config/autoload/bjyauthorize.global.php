@@ -12,7 +12,7 @@ return [
          *
          * for ZfcUser, this will be your default identity provider
          */
-        'identity_provider' => "\BjyAuthorize\Provider\Identity\ZfcUserZendDb",
+        'identity_provider' => 'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider',
 
         /* If you only have a default role and an authenticated role, you can
          * use the 'AuthenticationIdentityProvider' to allow/restrict access
@@ -33,11 +33,9 @@ return [
             /* here, 'guest' and 'user are defined as top-level roles, with
              * 'admin' inheriting from user
              */
-            "BjyAuthorize\Provider\Role\Config" => [
-                'guest' => [],
-                'user'  => ['children' => [
-                    'admin' => [],
-                ]],
+            'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => [
+                'role_entity_class' => 'Application\Entity\Role',
+                'object_manager'    => 'doctrine.entity_manager.orm_default',
             ],
 
         ],
