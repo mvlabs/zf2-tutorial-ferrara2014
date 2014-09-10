@@ -20,7 +20,8 @@ class EventsControllerFactory implements FactoryInterface {
 	    
 	    // Object graph is constructed
 	    $countries = $eventService->getCountries();
-	    $form = new \Events\Form\Promote($countries);
+            $objectManager = $serviceLocator->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+	    $form = new \Events\Form\Promote($objectManager, $countries);
 	    
 	    $formFilter = new \Events\Form\PromoteFilter();
 	    $form->setInputFilter($formFilter);

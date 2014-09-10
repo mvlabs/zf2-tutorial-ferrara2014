@@ -2,6 +2,7 @@
 
 namespace Events\Controller;
 
+use Events\Entity\Event;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Mail\Transport;
@@ -76,6 +77,8 @@ class EventsController extends AbstractActionController
     public function processAction(){
     
         $form = $this->promoteForm;
+        
+        $form->bind(new Event());
     
         if ($this->request->isPost()) {
             $post = $this->request->getPost()->toArray();
@@ -92,7 +95,7 @@ class EventsController extends AbstractActionController
                 return $model;
             } 
             
-            $this->eventService->insertEventFromArray($post);
+            $this->eventService->insertEvent($form->getData());
             
             return $this->redirect()->toRoute('events/thanks');
           

@@ -5,12 +5,17 @@ namespace Events\Form;
 use Zend\Form\Form,
     Zend\Form\Element,
     Zend\Validator;
+use Doctrine\Common\Persistence\ObjectManager;
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 
 class Promote extends Form {
     	
-    public function __construct(array $countryList = null, $name = 'contact') {
+    public function __construct(ObjectManager $objectManager, array $countryList = null, $name = 'contact') {
         
         parent::__construct($name);
+        
+        // set form hydrator
+        $this->setHydrator(new DoctrineHydrator($objectManager, '\Events\Entity\Promote'));
         
         $this->add(array(
             'name' => 'title',

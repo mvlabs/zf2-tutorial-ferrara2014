@@ -90,18 +90,6 @@ class Event {
      * })
      */
     private $country;
-        
-    public function exchangeArray($data)
-    {
-        $this->fillWith($data);
-    } 
-    
-    public static function createFromArray($data) {
-        $event = new Event();
-        $event->fillWith($data);
-    
-        return $event;
-    }
     
     private function setId($i_id) {
     	$this->id = $i_id;
@@ -325,27 +313,6 @@ class Event {
         }
         
         return $this->country->getName();
-    }
-
-	
-    public function fillWith($data){
-        
-        $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->title = (isset($data['title'])) ? $data['title'] : null;
-        $this->abstract = (isset($data['abstract'])) ? $data['abstract'] : null;
-        $this->datefrom = (isset($data['datefrom'])) ? \DateTime::createFromFormat('Y/m/d', substr($data['datefrom'], 0, 10)) : null;
-        $this->dateto = (isset($data['dateto'])) ? \DateTime::createFromFormat('Y/m/d', substr($data['dateto'],0,10)) : null;
-        $this->city = (isset($data['city'])) ? $data['city'] : null;
-        $this->country = (isset($data['country'])) ? $data['country'] : null;
-        $this->venue = (isset($data['venue'])) ? $data['venue'] : null;
-        $this->averagedayfee = (is_numeric($data['averagedayfee'])) ? $data['averagedayfee'] : null;
-        $this->mainsitelink = (isset($data['mainsitelink'])) ? $data['mainsitelink'] : null;
-                
-    }
-    
-    public function getArrayCopy()
-    {
-        return get_object_vars($this);
     }
     
 }

@@ -88,11 +88,8 @@ class EventService {
      * @param array $formData
      * @return \Events\Entity\Event
      */
-    public function insertEventFromArray(array $formData) {
+    public function insertEvent(Event $event) {
         
-        $formData['country'] = $this->mapper->getCountry($formData['country']);
-        $event = Event::createFromArray($formData);
-            
         $this->mapper->saveEvent($event);
         
         return $event;
