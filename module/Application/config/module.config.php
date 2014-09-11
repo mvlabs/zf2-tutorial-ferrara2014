@@ -63,6 +63,44 @@ return array(
                     ),
                 ),
             ),
+            
+            'feedback' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/feedback',
+                    'defaults' => array(
+                        '__NAMESPACE__' => 'Application\Controller',
+                        'controller'    => 'Feedback',
+                        'action'        => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'send' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/send',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Feedback',
+                                'action'        => 'send',
+                            ),
+                        )
+                    ),
+                    'thankyou' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/thankyou',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Feedback',
+                                'action'        => 'thankyou',
+                            ),
+                        )
+                    ),
+                ),
+            ),
+            
         ),
     ),
     'service_manager' => array(
@@ -82,7 +120,10 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+        ),
+        'factories' => array(
+            'Application\Controller\Feedback' => 'Application\Controller\FeedbackControllerFactory',
         ),
     ),
     'view_manager' => array(
