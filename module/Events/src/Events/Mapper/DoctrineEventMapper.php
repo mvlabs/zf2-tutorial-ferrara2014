@@ -67,7 +67,7 @@ class DoctrineEventMapper implements EventMapperInterface {
     {
         
         if (null == $country) {
-            return $this->eventRepository->findAll();
+            return $this->eventRepository->findEventsInVerona();
         }
         
         return $this->eventRepository->findByCountry($country);
