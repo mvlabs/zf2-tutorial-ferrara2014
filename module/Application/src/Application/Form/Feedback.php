@@ -19,7 +19,7 @@ class Feedback extends Form {
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Your ',
+                'label' => 'Your name',
             ),
         ));
         

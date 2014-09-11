@@ -42,7 +42,7 @@ class FeedbackControllerTest extends AbstractHttpControllerTestCase {
         
     }
     
-    public function testFeedbackSentValidFormCorrectly() {
+    public function testFeedbackSentValid() {
         
         $formData = array (
             'name' => 'Bob',
@@ -56,6 +56,22 @@ class FeedbackControllerTest extends AbstractHttpControllerTestCase {
         
         $sentData = file_get_contents(__DIR__ . '/../../../../../data/data.json');
         $this->assertEquals($sentData, json_encode($formData));
+        
+    }
+    
+    public function testFeedbackSentMissingName() {
+        
+        $formData = array (
+            'email' => 'email@me.com',
+            'message' => 'I love hubme.in!',
+            'submit' => 'Submit'
+        );
+
+    	$this->dispatch('/feedback/send', 'POST', $formData);
+    	
+        $this->assertResponseStatusCode(200);
+    	$this->assertControllerClass('FeedbackController');
+    	$this->assertActionName('send');
         
     }
     

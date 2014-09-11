@@ -37,10 +37,27 @@ class FeedbackController extends AbstractActionController
     
     public function sendAction() {
         
-        // store into db, send mails, etc
-        file_put_contents(__DIR__ . '/../../../../../data/data.json', json_encode($this->request->getPost()->toArray()));
-        
-        return $this->redirect()->toRoute('feedback/thankyou');
+        if ($this->request->isPost()) {
+            
+            $post = $this->request->getPost()->toArray();
+
+            $this->form->setData($post);
+            
+            if(!$this->form->isValid()) {
+                
+                $model = new ViewModel(array(
+                    'form'  => $this->form,
+                ));
+                $model->setTemplate('application/feedback/index');
+                return $model;
+            } 
+            
+            // store into db, send mails, etc
+            file_put_contents(__DIR__ . '/../../../../../data/data.json', json_encode($this->request->getPost()->toArray()));
+            
+            return $this->redirect()->toRoute('feedback/thankyou');
+            
+        }
         
     }
     
