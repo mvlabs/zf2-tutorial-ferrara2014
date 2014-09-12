@@ -1,0 +1,18 @@
+<aside id="sidebar" class="fr">
+    <div class="rounded-box-title box">
+        <div class="box-inner clearfix">
+            <form id="country-form" action="/events" method="get" class="sidebar-form">
+                <div class="layout-slider">
+                </div>
+                <p><label for="location-1">Location: </label>
+                    <select name="country" id="country">
+                        <?php
+                        foreach ($this->countries as $name) { ?>
+                            <option><?php echo $name  ?></option>';
+                        <?php } ?>
+                    </select></p>
+                <p><a href="" class="bigbutton">Refine</a></p>
+            </form>
+        </div>
+    </div><!-- END: box -->
+</aside>
