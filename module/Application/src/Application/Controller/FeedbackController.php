@@ -59,6 +59,8 @@ class FeedbackController extends AbstractActionController
             
         }
         
+        $this->getResponse()->setStatusCode(404);
+        
     }
     
     public function thankyouAction() {
