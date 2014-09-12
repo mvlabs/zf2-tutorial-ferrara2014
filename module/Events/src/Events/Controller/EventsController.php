@@ -35,8 +35,7 @@ class EventsController extends AbstractActionController
      */
     public function indexAction()
     {
-    	$country = $this->getAndCheckNumericParam('country');
-    	return new ViewModel(array('events' => $this->eventService->getList($country)));
+    	return new ViewModel(array('events' => $this->eventService->getList()));
     }
     
     /**
@@ -45,7 +44,7 @@ class EventsController extends AbstractActionController
      * @return \Zend\View\Model\ViewModel
      */
     public function eventAction() {
-    	$id = $this->getAndCheckNumericParam('id');
+    	$id = $this->getRequest()->getQuery('id');
     	return new ViewModel(array('event' => $this->eventService->getEvent($id)));
     }
 

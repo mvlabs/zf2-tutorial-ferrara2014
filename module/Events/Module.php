@@ -52,18 +52,7 @@ class Module implements ViewHelperProviderInterface
             ),
         );
         
-    } 
-    
-    
-    public function getControllerPluginConfig()
-    {
-    	return array(
-    		'invokables' => array(
-    		    'getAndCheckNumericParam' => 'Events\Controller\Plugin\GetAndCheckNumericParam',
-    		)
-    	);
-    }
-    
+    }     
     
     public function getViewHelperConfig()
     {
