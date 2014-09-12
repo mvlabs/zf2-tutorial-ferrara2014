@@ -75,4 +75,9 @@ class FeedbackControllerTest extends AbstractHttpControllerTestCase {
         
     }
     
+    public function tearDown() {
+    	@unlink(__DIR__ . '/../../../../../data/data.json');
+    	parent::tearDown();
+    }
+    
 }
