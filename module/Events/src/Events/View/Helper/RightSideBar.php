@@ -7,12 +7,8 @@ use Zend\Http\Request;
 
 class RightSideBar extends AbstractHelper {
 
-    private $countries;
-    
-    private $currentCountry;
-    
     public function __construct() {
-        
+                
     }
     
 	public function __invoke() {
