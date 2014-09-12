@@ -75,6 +75,14 @@ class FeedbackControllerTest extends AbstractHttpControllerTestCase {
         
     }
     
+    public function testFeedbackSentWrongRequestVerb() {
+        
+    	$this->dispatch('/feedback/send', 'GET');
+    	
+        $this->assertResponseStatusCode(404);
+        
+    }
+    
     public function tearDown() {
     	@unlink(__DIR__ . '/../../../../../data/data.json');
     	parent::tearDown();
