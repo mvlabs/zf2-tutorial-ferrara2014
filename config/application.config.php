@@ -7,7 +7,6 @@ return array(
         'ZendDeveloperTools',
         
         // our app modules
-        'Events',
         'Application',
         
     ),
