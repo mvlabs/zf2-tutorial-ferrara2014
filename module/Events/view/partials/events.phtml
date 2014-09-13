@@ -23,6 +23,9 @@ if (count($this->events) == 0) {
 		<div class="description">
 			<p><?php echo $event->getAbstract(); ?></p>
 		</div>
+                <div class="tag"><?php foreach($event->getTags() as $tag) { ?>
+                    <a href="#" class="tagbutton"><?php echo $tag->getName() ?></a>
+                <?php } ?></div>
 	</div>
 </div>
 <?php } ?>

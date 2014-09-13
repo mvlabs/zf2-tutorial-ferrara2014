@@ -90,6 +90,14 @@ class Event {
      * })
      */
     private $country;
+    
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Events\Entity\Tag", inversedBy="events")
+     * @ORM\JoinTable(name="event_tags")
+     */
+    private $tags;
         
     public function exchangeArray($data)
     {
@@ -348,4 +356,44 @@ class Event {
         return get_object_vars($this);
     }
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Events\Entity\Tag $tags
+     * @return Event
+     */
+    public function addTag(\Events\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Events\Entity\Tag $tags
+     */
+    public function removeTag(\Events\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
 }
