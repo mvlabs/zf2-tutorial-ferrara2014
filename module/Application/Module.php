@@ -29,6 +29,10 @@ class Module
         $I_mailService = $I_sm->get('Application\Service\MailService');
         $I_sharedEventManager->attach('Events\Service\EventService', 'event_saved', array($I_mailService, 'logEventSaved'));
         
+        // attach queue service to event_saved event
+        $I_queueService = $I_sm->get('Application\Service\QueueService');
+        $I_sharedEventManager->attach('Events\Service\EventService', 'event_saved', array($I_queueService, 'enqueueEvent'));
+        
         // Common Error Handling Code
         $I_eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function($e) {
         
@@ -71,4 +75,5 @@ class Module
             ),
         );
     }
+    
 }

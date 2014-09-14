@@ -8,6 +8,23 @@
  */
 
 return array(
+    
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'events-stream' => array(
+                    'options' => array(
+                        'route'    => 'events-stream',
+                        'defaults' => array(
+                            'controller'    => 'Application\Controller\Cli',
+                            'action'        => 'events-stream',
+                        ),
+                    ),
+                ),                
+            ),
+        ),
+    ),
+    
     'router' => array(
         'routes' => array(
             
@@ -69,6 +86,7 @@ return array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
             'Application\Service\MailService' => 'Application\Service\MailServiceFactory',
+            'Application\Service\QueueService' => 'Application\Service\QueueServiceFactory',
         ),
     ),
     'translator' => array(
@@ -83,7 +101,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Cli' => 'Application\Controller\CliController'
         ),
     ),
     'view_manager' => array(
