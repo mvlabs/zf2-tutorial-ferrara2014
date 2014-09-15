@@ -12,5 +12,17 @@
         "zendframework/zendframework": "2.2.5",
         "doctrine/doctrine-orm-module": "0.8.*",
         "zendframework/zend-developer-tools": "dev-master"
+    },
+    "require-dev" : {
+       "mvlabs/zf2behat-extension" : "dev-master",
+        "behat/mink": "1.5.0",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "mvlabs/zf2behat-extension" : "dev-master",
+        "phpspec/phpspec": "2.0.*@dev",
+        "phpunit/phpunit": "4.0.*",
+        "zendframework/zend-developer-tools": "dev-master",
+        "zendframework/zftool": "dev-master",
+        "phpmd/phpmd" : "1.4.*"
     }
 }

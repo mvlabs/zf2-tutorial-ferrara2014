@@ -1,0 +1,11 @@
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: http://zf2-hubmein
+      goutte:   ~
+    MvLabs\Zf2Extension\Zf2Extension:
+      module:
+      config: "config/application.config.php"
+  paths:
+    features:  features
+    bootstrap: features/bootstrap
