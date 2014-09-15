@@ -4,8 +4,13 @@ Feature: Visit the About Page
     in order to find out about the project
     
 Scenario:
-    Given I am in the home page
+    Given I go to the homepage
     When I follow "About"
     Then I should see the "About" page
+
+Scenario:
+    Given I go to the homepage
+    When I follow "Find Out More Great Events..."
+    Then I should see the "Event" page
 
    

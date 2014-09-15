@@ -5,7 +5,8 @@ namespace Application\Features\Context;
 use Behat\Behat\Context\ClosuredContextInterface,
     Behat\Behat\Context\TranslatedContextInterface,
     Behat\Behat\Context\BehatContext,
-    Behat\Behat\Exception\PendingException;
+    Behat\Behat\Exception\PendingException,
+    Behat\MinkExtension\Context\MinkContext;
 
 use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
@@ -23,7 +24,7 @@ use Zend\Mvc\Application;
 /**
 * Feature context.
 */
-class FeatureContext extends BehatContext //MinkContext if you want to test web page
+class FeatureContext extends MinkContext
 implements Zf2AwareContextInterface
 {
     private $zf2MvcApplication;
@@ -62,4 +63,22 @@ implements Zf2AwareContextInterface
     //  $serviceManager->get('service.example')->doSomethingWith($argument);
     // }
 //
+
+    /**
+     * @Then /^I should see the "([^"]*)" page$/
+     */
+    public function iShouldSeeThePage($pageTitle)
+    {
+        // Siamo sul sito giusto?
+        $this->assertPageContainsText('Hubme.in');
+        
+        // Asserire che lo status code ci vada bene
+        $this->assertResponseStatus(200);
+        
+        // Asserire che la pagina invocata sia quella corretta
+        $this->assertPageAddress('/'.  strtolower($pageTitle));
+        
+        // Asserire che il titolo sia quello giusto
+        $this->assertElementContains('h2 strong', $pageTitle);
+    }
 }
