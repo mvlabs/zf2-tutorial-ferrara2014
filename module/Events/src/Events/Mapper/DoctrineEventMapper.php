@@ -16,7 +16,7 @@ class DoctrineEventMapper implements EventMapperInterface {
     {
         $this->entityManager = $entityManager;
         $this->eventRepository = $this->entityManager->getRepository('Events\Entity\Event');
-	    $this->countryRepository = $this->entityManager->getRepository('Events\Entity\Country');
+	$this->countryRepository = $this->entityManager->getRepository('Events\Entity\Country');
     }
 	
      /**
@@ -68,9 +68,10 @@ class DoctrineEventMapper implements EventMapperInterface {
         
         if (null == $country) {
             return $this->eventRepository->findAll();
-        }
+        } 
         
-        return $this->eventRepository->findByCountry($country);
+        $countryObject = $this->countryRepository->findOneByName($country);     // it's better to use a slug
+        return $this->eventRepository->findByCountry($countryObject);
         
     }
     

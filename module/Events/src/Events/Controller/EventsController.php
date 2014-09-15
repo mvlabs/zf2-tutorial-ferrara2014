@@ -29,13 +29,15 @@ class EventsController extends AbstractActionController
     }
     
     /**
-     * Returns a list of events, as fethched from model
+     * Returns a list of events, as fetched from model
      * 
      * @return \Zend\View\Model\ViewModel
      */
     public function indexAction()
     {
-    	return new ViewModel(array('events' => $this->eventService->getList()));
+        $country = $this->getRequest()->getQuery('country', null);
+        
+    	return new ViewModel(array('events' => $this->eventService->getList($country)));
     }
     
     /**
