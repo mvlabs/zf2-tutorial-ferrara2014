@@ -13,10 +13,13 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class EventsEndToEndTest extends AbstractHttpControllerTestCase {
         
+    private $serviceManager;
     
     public function setUp() {
     	$this->setApplicationConfig(include __DIR__ . '/../../TestConfig.php.dist');
     	parent::setUp();
+                
+        $this->serviceManager = \Bootstrap::getServiceManager();
     }
 
     
@@ -40,47 +43,13 @@ class EventsEndToEndTest extends AbstractHttpControllerTestCase {
         }
     	
     }
-    
-    protected function getEmMock()
-    {   
-        $emMock  = $this->getMock('\Doctrine\ORM\EntityManager',
-            array('getRepository', 'getClassMetadata', 'persist', 'flush'), array(), '', false);
-        /*$emMock->expects($this->any())
-            ->method('getRepository')
-            ->will($this->returnValue(new FakeRepository()));*/
-        $emMock->expects($this->any())
-            ->method('getClassMetadata')
-            ->will($this->returnValue((object)array('name' => 'aClass')));
-        $emMock->expects($this->any())
-            ->method('persist')
-            ->will($this->returnValue(null));
-        $emMock->expects($this->any())
-            ->method('flush')
-            ->will($this->returnValue(null));
-        return $emMock;  // it tooks 13 lines to achieve mock!
-     }
-    
+        
     /**
      * @test
      */
     public function searchEventBasedOnCountryItaly() {
         
-        // mock service
-        $doctrineEM = $this->getEmMock();
-        $mapper = $this->getMock('\Events\Mapper\DoctrineEventMapper',
-                  array('__construct', 'findAll'),
-                  array($doctrineEM));
-        
-        $service = $this->getMock('\Events\Service\EventService', 
-                   array('__construct'),
-                   array($mapper));
-        
-        
-        $service->expects($this->once())
-                ->method('__construct');
-        
-        
-        $controller = new \Events\Controller\EventsController($service);
+        $controller = new \Events\Controller\EventsController($this->serviceManager->get('Events\Service\EventService'));
         $request    = new Request();
         
         $routeMatch = new RouteMatch(array('controller' => 'events'));
@@ -93,7 +62,6 @@ class EventsEndToEndTest extends AbstractHttpControllerTestCase {
         $request->getQuery()->set('country', 'Italy');
         
         $result = $controller->dispatch($request);
-        //$result = $controller->dispatch('/events?country=Italy');
         
         $response = $controller->getResponse();
         $this->assertEquals(200, $response->getStatusCode());
@@ -112,11 +80,39 @@ class EventsEndToEndTest extends AbstractHttpControllerTestCase {
     /**
      * @test
      */
-    /*public function searchEventBasedOnCountryUK() {
+    public function correctUrlOnEventSearchBasedOnCountryItaly() {
         
-        $result = $this->dispatch('/events?country=UK');
+        $this->dispatch('/events?country=Italy');
         
         $this->assertResponseStatusCode(200);
+    	$this->assertControllerClass('EventsController');
+    	$this->assertActionName('index');
+        
+        $this->assertQueryCount("div.conferences div.event", 3);
+        
+    }
+    
+    /**
+     * @test
+     */
+    public function searchEventBasedOnCountryUK() {
+        
+        $controller = new \Events\Controller\EventsController($this->serviceManager->get('Events\Service\EventService'));
+        $request    = new Request();
+        
+        $routeMatch = new RouteMatch(array('controller' => 'events'));
+        $routeMatch->setParam('action', 'index');
+        
+        $event      = new MvcEvent();
+        $event->setRouteMatch($routeMatch);
+        $controller->setEvent($event);
+        
+        $request->getQuery()->set('country', 'UK');
+        
+        $result = $controller->dispatch($request);
+        
+        $response = $controller->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
  
         // Check for a ViewModel to be returned
         $this->assertInstanceOf('Zend\View\Model\ViewModel', $result);
@@ -127,6 +123,25 @@ class EventsEndToEndTest extends AbstractHttpControllerTestCase {
         $expectedResult = 0;
         $this->assertCount($expectedResult, $vars['events']);
         
-    }*/
+    }
+    
+    /**
+     * @test
+     */
+    public function correctUrlOnEventSearchBasedOnCountryUK() {
+        
+        $this->dispatch('/events?country=UK');
+        
+        $this->assertResponseStatusCode(200);
+    	$this->assertControllerClass('EventsController');
+    	$this->assertActionName('index');
+        
+        $this->assertQueryCount("div.conferences div.event", 1);
+        
+        $this->assertQueryContentContains('div.conferences div.event div.event-info h3', 
+                                          'No events happening in selected country soon.');
+        
+    }
+    
     
 }
