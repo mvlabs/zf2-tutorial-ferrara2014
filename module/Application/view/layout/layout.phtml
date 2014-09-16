@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <?php 
+
 //title
 echo $this->headTitle('Hubme.in')->setSeparator(' | ')->setAutoEscape(false);
 
@@ -31,6 +32,8 @@ echo $this->headScript()->prependFile('/js/jquery-1.4.2.js')
       </ul>
     </div>
   </div>
+    
+  <!-- header-->
   <header id="header" class="clearfix">
     <div class="wrap">
       <h1 id="logo"><a href="<?php echo $this->url('home'); ?>"></a></h1>
@@ -42,15 +45,14 @@ echo $this->headScript()->prependFile('/js/jquery-1.4.2.js')
   <div id="main-content" class="clearfix">
 
             <?php echo $this->content; ?>
-</div>
+  </div>
   <!-- END: main-->
-  <?php echo $this->partial('partials/footer.phtml'); ?>
-  <!-- END: main--> 
+  
+  <?php echo $this->partial('partials/footer.phtml', array('year' => date("Y"))); ?>
   
 </div>
+    
 <!-- END: page-->
 
 </body>
-</html>
-            
 </html>
