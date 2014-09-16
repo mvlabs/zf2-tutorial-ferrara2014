@@ -49,18 +49,41 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                   
+                    'team-member' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/team/member/[:slug]',
+                            'constraints' => array(
+                                'slug' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Team',
+                                'action'        => 'member',
+                            ),
+                        ),
+                    ),
+                    
                     'default' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            // Take care of discussing about trailing slash
+                            'route'    => '/[:controller/[:action]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Team',
+                                'action'        => 'index',
                             ),
                         ),
                     ),
+                    
+                  
+                    
                 ),
             ),
         ),
@@ -83,7 +106,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Team' => 'Application\Controller\TeamController'
         ),
     ),
     'view_manager' => array(
