@@ -21,6 +21,12 @@ echo $this->headScript()->prependFile('/js/jquery-1.4.2.js')
                         ->appendFile('/js/html5.js')
                         ->appendFile('/js/custom.js');
 
+// inline js
+echo $this->inlineScript();
+
+// inline css
+echo $this->headStyle();
+    
 ?>
 </head>
 <body id="about">
