@@ -68,6 +68,13 @@ return array(
     'service_manager' => array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
+            'doctrine.cache.memcached' => function ($sm) {
+                $cache = new \Doctrine\Common\Cache\MemcachedCache();
+                $memcached = new \Memcached();
+                $memcached->addServer('localhost', 11211);
+                $cache->setMemcached($memcached);
+                return $cache;
+            }
         ),
     ),
     'translator' => array(
